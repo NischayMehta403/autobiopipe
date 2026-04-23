@@ -1,8 +1,25 @@
+# Python
 __pycache__/
 *.py[cod]
-.venv/
-.env
+*$py.class
+*.so
+.Python
+build/
 dist/
 *.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+
+# Project outputs
 autobiopipe_output/
 *.log
+
+# Do NOT ignore the autobiopipe/ package folder!
+# The rule "autobiopipe/" should NOT be here
