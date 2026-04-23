@@ -1,0 +1,94 @@
+{
+  "autobiopipe_version": "0.1.0",
+  "generated_at": "2026-04-23T14:17:38.571671+00:00",
+  "detection": {
+    "file_name": "sample.fastq",
+    "file_type": "fastq",
+    "is_compressed": false,
+    "sequencing_type": "single-end",
+    "confidence": "high",
+    "warnings": []
+  },
+  "qc": {
+    "total_records": 2,
+    "n_fraction": 0.0,
+    "gc": {
+      "mean": 75.0,
+      "std_dev": 35.3553,
+      "min": 50.0,
+      "max": 100.0
+    },
+    "length": {
+      "mean": 16,
+      "min": 16,
+      "max": 16,
+      "cv": 0.0,
+      "total_bases": 32
+    },
+    "quality": {
+      "mean_per_read": 30.0,
+      "reads_below_threshold": 0,
+      "reads_below_threshold_pct": 0.0
+    }
+  },
+  "decision": {
+    "overall_status": "WARNING",
+    "summary": "\u26a0\ufe0f  WARNING \u2014 3 warning(s) detected. Review recommendations.",
+    "findings": [
+      {
+        "rule_id": "QC001",
+        "severity": "INFO",
+        "metric": "mean_quality",
+        "message": "Mean quality (30.0) is within acceptable range.",
+        "recommendation": "No quality trimming required.",
+        "value": 30.0,
+        "threshold": 25.0
+      },
+      {
+        "rule_id": "QC002",
+        "severity": "WARNING",
+        "metric": "gc_content",
+        "message": "GC content (75.0%) exceeds the upper bound (60%). This may indicate PCR bias, rRNA contamination, or a high-GC organism.",
+        "recommendation": "Verify the expected GC content for this organism. If the sample is from a high-GC organism (e.g., Streptomyces), update gc_content_max in your config.",
+        "value": 75.0,
+        "threshold": 60.0
+      },
+      {
+        "rule_id": "QC003",
+        "severity": "INFO",
+        "metric": "read_length_cv",
+        "message": "Read length distribution is consistent (CV=0.00).",
+        "recommendation": "No length-filtering action required.",
+        "value": 0.0,
+        "threshold": 0.3
+      },
+      {
+        "rule_id": "QC003",
+        "severity": "WARNING",
+        "metric": "min_read_length",
+        "message": "Shortest read (16 bp) is below the minimum length threshold (75 bp).",
+        "recommendation": "Filter reads shorter than the threshold using tools like fastp (--length_required) or Trimmomatic (MINLEN).",
+        "value": 16.0,
+        "threshold": 75.0
+      },
+      {
+        "rule_id": "QC004",
+        "severity": "INFO",
+        "metric": "n_fraction",
+        "message": "N-base fraction (0.00%) is within acceptable limits.",
+        "recommendation": "No action required for N-bases.",
+        "value": 0.0,
+        "threshold": 0.05
+      },
+      {
+        "rule_id": "QC005",
+        "severity": "WARNING",
+        "metric": "total_records",
+        "message": "Dataset contains only 2 records (threshold: 100). Statistical inferences from this QC run may be unreliable.",
+        "recommendation": "Increase sequencing depth or verify that the correct file was submitted. This QC report is still valid but should be interpreted with caution.",
+        "value": 2.0,
+        "threshold": 100.0
+      }
+    ]
+  }
+}

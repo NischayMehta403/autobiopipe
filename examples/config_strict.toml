@@ -1,0 +1,10 @@
+[qc]
+min_avg_quality = 25.0      # stricter
+gc_content_min = 40.0       # stricter
+gc_content_max = 60.0       # stricter
+min_read_length = 75        # stricter
+length_cv_threshold = 0.3   # stricter
+
+[pipeline]
+verbose = true
+output_dir = "./strict_results"

@@ -1,0 +1,24 @@
+SECTION,METRIC,VALUE
+QC,file_name,sample.fastq
+QC,file_type,fastq
+QC,total_records,2
+QC,total_bases,32
+QC,gc_mean,75.0
+QC,gc_std_dev,35.3553
+QC,length_mean,16
+QC,length_min,16
+QC,length_max,16
+QC,length_cv,0.0
+QC,n_fraction,0.0
+QC,mean_quality,30.0
+QC,reads_below_threshold,0
+QC,reads_below_pct,0.0
+
+SECTION,RULE_ID,SEVERITY,METRIC,MESSAGE,RECOMMENDATION,VALUE,THRESHOLD
+FINDING,QC001,INFO,mean_quality,Mean quality (Q30.0) is within acceptable range.,No trimming required.,30.0,
+FINDING,QC002,WARNING,gc_content,GC content (75.0%) exceeds the upper bound (65%). May indicate PCR bias or a high-GC organism.,Verify expected GC% for this organism. Update gc_content_max in config if intentional.,75.0,65.0
+FINDING,QC003,WARNING,min_read_length,Shortest read (16 bp) is below 50 bp.,Filter short reads with fastp --length_required.,16.0,50.0
+FINDING,QC004,INFO,n_fraction,N-base fraction (0.00%) is within acceptable limits.,No action required.,0.0,
+
+VERDICT,overall_status,WARNING
+VERDICT,summary,⚠️  WARNING — 2 warning(s) found.

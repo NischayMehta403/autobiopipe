@@ -1,0 +1,2 @@
+[console_scripts]
+autobio = autobiopipe.cli:app

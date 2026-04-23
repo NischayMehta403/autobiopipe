@@ -1,0 +1,76 @@
+{
+  "autobiopipe_version": "0.1.0",
+  "generated_at": "2026-04-20T17:11:41.772393+00:00",
+  "detection": {
+    "file_name": "sample.fastq",
+    "file_type": "fastq",
+    "is_compressed": false,
+    "sequencing_type": "single-end",
+    "confidence": "high",
+    "warnings": []
+  },
+  "qc": {
+    "total_records": 2,
+    "n_fraction": 0.0,
+    "gc": {
+      "mean": 75.0,
+      "std_dev": 35.3553,
+      "min": 50.0,
+      "max": 100.0
+    },
+    "length": {
+      "mean": 16,
+      "min": 16,
+      "max": 16,
+      "cv": 0.0,
+      "total_bases": 32
+    },
+    "quality": {
+      "mean_per_read": 30.0,
+      "reads_below_threshold": 0,
+      "reads_below_threshold_pct": 0.0
+    }
+  },
+  "decision": {
+    "overall_status": "WARNING",
+    "summary": "\u26a0\ufe0f  WARNING \u2014 2 warning(s) found.",
+    "findings": [
+      {
+        "rule_id": "QC001",
+        "severity": "INFO",
+        "metric": "mean_quality",
+        "message": "Mean quality (Q30.0) is within acceptable range.",
+        "recommendation": "No trimming required.",
+        "value": 30.0,
+        "threshold": null
+      },
+      {
+        "rule_id": "QC002",
+        "severity": "WARNING",
+        "metric": "gc_content",
+        "message": "GC content (75.0%) exceeds the upper bound (65%). May indicate PCR bias or a high-GC organism.",
+        "recommendation": "Verify expected GC% for this organism. Update gc_content_max in config if intentional.",
+        "value": 75.0,
+        "threshold": 65.0
+      },
+      {
+        "rule_id": "QC003",
+        "severity": "WARNING",
+        "metric": "min_read_length",
+        "message": "Shortest read (16 bp) is below 50 bp.",
+        "recommendation": "Filter short reads with fastp --length_required.",
+        "value": 16.0,
+        "threshold": 50.0
+      },
+      {
+        "rule_id": "QC004",
+        "severity": "INFO",
+        "metric": "n_fraction",
+        "message": "N-base fraction (0.00%) is within acceptable limits.",
+        "recommendation": "No action required.",
+        "value": 0.0,
+        "threshold": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+SECTION,METRIC,VALUE
+QC,file_name,sample.fastq
+QC,file_type,fastq
+QC,total_records,2
+QC,total_bases,32
+QC,gc_mean,75.0
+QC,gc_std_dev,35.3553
+QC,length_mean,16
+QC,length_min,16
+QC,length_max,16
+QC,length_cv,0.0
+QC,n_fraction,0.0
+QC,mean_quality,30.0
+QC,reads_below_threshold,0
+QC,reads_below_pct,0.0
+
+SECTION,RULE_ID,SEVERITY,METRIC,MESSAGE,RECOMMENDATION,VALUE,THRESHOLD
+FINDING,QC001,INFO,mean_quality,Mean quality (30.0) is within acceptable range.,No quality trimming required.,30.0,25.0
+FINDING,QC002,WARNING,gc_content,"GC content (75.0%) exceeds the upper bound (60%). This may indicate PCR bias, rRNA contamination, or a high-GC organism.","Verify the expected GC content for this organism. If the sample is from a high-GC organism (e.g., Streptomyces), update gc_content_max in your config.",75.0,60.0
+FINDING,QC003,INFO,read_length_cv,Read length distribution is consistent (CV=0.00).,No length-filtering action required.,0.0,0.3
+FINDING,QC003,WARNING,min_read_length,Shortest read (16 bp) is below the minimum length threshold (75 bp).,Filter reads shorter than the threshold using tools like fastp (--length_required) or Trimmomatic (MINLEN).,16.0,75.0
+FINDING,QC004,INFO,n_fraction,N-base fraction (0.00%) is within acceptable limits.,No action required for N-bases.,0.0,0.05
+FINDING,QC005,WARNING,total_records,Dataset contains only 2 records (threshold: 100). Statistical inferences from this QC run may be unreliable.,Increase sequencing depth or verify that the correct file was submitted. This QC report is still valid but should be interpreted with caution.,2.0,100.0
+
+VERDICT,overall_status,WARNING
+VERDICT,summary,⚠️  WARNING — 3 warning(s) detected. Review recommendations.
