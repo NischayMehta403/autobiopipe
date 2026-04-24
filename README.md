@@ -316,6 +316,16 @@ Natural next directions for the project include:
 - stronger config presets for different data types
 - optional AI-assisted explanation layers on top of the structured QC output
 
+## Author
+
+AutoBioPipe is maintained by [NischayMehta403](https://github.com/NischayMehta403).
+
+## License
+
+This project is released under the MIT License.
+
+See [LICENSE](LICENSE) for the full text.
+
 ## Notes
 
 - Empty files, malformed FASTQ records, multiline FASTA sequences, gzip compression, and paired-end filename hints are handled explicitly.
