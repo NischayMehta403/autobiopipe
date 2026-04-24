@@ -1,4 +1,6 @@
->seq1 test sequence 
-ATGCATGCATGC
->seq2 another one
-GCGCGCGCGCGC
+>seq1 sample_one
+ATGC
+>seq2 sample_two
+GGCC
+>seq3 sample_three
+AATT

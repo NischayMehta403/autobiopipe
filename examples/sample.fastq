@@ -1,8 +1,12 @@
-@read1 test read
-ATGCATGCATGCATGC
+@read1 sample_one
+ATGC
 +
-IIIIIIIIIIIIIIII
-@read2 another read
-GCGCGCGCGCGCGCGC
+IIII
+@read2 sample_two
+GGCC
 +
-5555555555555555
+5555
+@read3 sample_three
+AATT
++
+!!!!

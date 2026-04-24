@@ -1,10 +1,41 @@
 [qc]
-min_avg_quality = 25.0      # stricter
-gc_content_min = 40.0       # stricter
-gc_content_max = 60.0       # stricter
-min_read_length = 75        # stricter
-length_cv_threshold = 0.3   # stricter
+min_avg_quality = 30.0
+gc_content_min = 45.0
+gc_content_max = 55.0
+min_read_length = 75
+length_cv_threshold = 0.10
+n_fraction_warning_threshold = 0.02
+n_fraction_critical_threshold = 0.10
+small_dataset_threshold = 500
+enable_small_dataset_warning = true
+
+[biology]
+gene_max_length = 10000
+genome_min_length = 1000000
+coding_score_coding_threshold = 0.75
+coding_score_noncoding_threshold = 0.30
+low_complexity_entropy_threshold = 0.65
+low_complexity_fraction_threshold = 0.20
+homopolymer_run_threshold = 6
+homopolymer_fraction_threshold = 0.10
+duplicate_fraction_warning_threshold = 0.10
+gc_extreme_low = 25.0
+gc_extreme_high = 75.0
+gc_skew_warning_threshold = 0.15
+gc_skew_critical_threshold = 0.25
+abnormal_length_ratio_threshold = 6.0
+length_std_dev_threshold = 50.0
+orf_presence_warning_threshold = 0.50
+coding_potential_warning_threshold = 0.45
+short_sequence_length_threshold = 100
+short_sequence_fraction_threshold = 0.10
+
+[visualization]
+enabled = true
+dpi = 180
+histogram_bins = 25
 
 [pipeline]
 verbose = true
-output_dir = "./strict_results"
+output_dir = "strict_results"
+max_records = 500

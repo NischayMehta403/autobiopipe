@@ -1,8 +1,165 @@
 Metadata-Version: 2.4
 Name: autobiopipe
 Version: 0.1.0
-Summary: Modular bioinformatics QC pipeline
+Summary: Modular, extensible Python CLI for FASTA/FASTQ quality control
+Author: AutoBioPipe Contributors
+License: MIT License
+        
+        Copyright (c) 2026 AutoBioPipe Contributors
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Homepage, https://github.com/example/autobiopipe
+Project-URL: Repository, https://github.com/example/autobiopipe
+Project-URL: Issues, https://github.com/example/autobiopipe/issues
+Keywords: bioinformatics,genomics,fastq,fasta,python,cli,pipeline,sequencing
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
 Requires-Python: >=3.9
-Requires-Dist: typer>=0.9.0
-Requires-Dist: rich>=13.0.0
-Requires-Dist: pydantic>=2.0.0
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: rich>=13.7.0
+Requires-Dist: typer>=0.12.3
+Requires-Dist: reportlab>=4.1.0
+Requires-Dist: tomli>=2.0.1; python_version < "3.11"
+Provides-Extra: dev
+Requires-Dist: pytest>=8.2.0; extra == "dev"
+Requires-Dist: pytest-cov>=5.0.0; extra == "dev"
+Dynamic: license-file
+
+# AutoBioPipe
+
+AutoBioPipe is a modular Python CLI for automated quality control of biological sequence files in FASTA and FASTQ format. It targets practical day-to-day QC for biologists and bioinformaticians who want fast detection, summary metrics, rule-based findings, and exportable reports.
+
+## Features
+
+- Detects FASTA or FASTQ by content and extension, including `.gz` inputs
+- Parses records lazily with custom `ParseError` exceptions and line numbers
+- Computes GC content, length statistics, quality-score summaries, and N-base fraction
+- Applies configurable QC rules `QC001` to `QC005`
+- Writes terminal, JSON, CSV, and PDF reports
+- Ships with a Typer CLI, examples, tests, and GitHub Actions
+
+## Installation
+
+```bash
+git clone https://github.com/example/autobiopipe.git
+cd autobiopipe
+pip install -e .
+```
+
+For development:
+
+```bash
+pip install -e .[dev]
+```
+
+## Quick Start
+
+Run the full pipeline on a FASTQ file:
+
+```bash
+autobio run examples/sample.fastq --output-dir results
+```
+
+Inspect file detection only:
+
+```bash
+autobio detect examples/sample.fasta
+```
+
+Render a saved JSON report:
+
+```bash
+autobio report results/sample.fastq_report.json
+```
+
+Show the installed version:
+
+```bash
+autobio version
+```
+
+## Example Outputs
+
+AutoBioPipe writes:
+
+- `*_report.json`
+- `*_report.csv`
+- `*_report.pdf`
+
+The JSON report is the canonical machine-readable output. CSV is useful for spreadsheets, and PDF is intended for sharing or archival summaries.
+
+## Configuration
+
+AutoBioPipe reads TOML configuration files. A default example is provided at [examples/config.toml](/home/Fred/autobiopipe/examples/config.toml) and a stricter variant at [examples/config_strict.toml](/home/Fred/autobiopipe/examples/config_strict.toml).
+
+Run with a custom config:
+
+```bash
+autobio run examples/sample.fastq --config examples/config.toml
+```
+
+## CLI Reference
+
+`autobio run <input_file> [--output-dir DIR] [--config FILE] [--verbose]`
+
+- Runs detect -> parse -> qc -> decision -> report
+- Exit code `0`: success with `PASS` or `WARNING`
+- Exit code `1`: runtime or input error
+- Exit code `2`: pipeline completed but overall status is `FAIL`
+
+`autobio detect <input_file>`
+
+- Prints the detected format, compression, and inferred sequencing layout
+
+`autobio report <json_file>`
+
+- Prints a previously generated JSON report in the terminal
+
+`autobio version`
+
+- Prints package and Python version information
+
+## Development
+
+Run tests with coverage:
+
+```bash
+pytest
+```
+
+Main project docs:
+
+- [docs/CONTRIBUTING.md](/home/Fred/autobiopipe/docs/CONTRIBUTING.md)
+- [docs/ARCHITECTURE.md](/home/Fred/autobiopipe/docs/ARCHITECTURE.md)
+- [CLAUDE.md](/home/Fred/autobiopipe/CLAUDE.md)
+
+## Notes
+
+- Empty files, malformed FASTQ records, multiline FASTA sequences, gzip compression, and paired-end filename hints are handled explicitly.
+- The bundled example reads are intentionally very short to keep tests and demos lightweight.

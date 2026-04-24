@@ -1,6 +1,11 @@
+LICENSE
+README.md
 pyproject.toml
 autobiopipe/__init__.py
+autobiopipe/_version.py
+autobiopipe/ai_explain.py
 autobiopipe/cli.py
+autobiopipe/config.py
 autobiopipe/decision.py
 autobiopipe/detect.py
 autobiopipe/parser.py
@@ -14,6 +19,8 @@ autobiopipe.egg-info/entry_points.txt
 autobiopipe.egg-info/requires.txt
 autobiopipe.egg-info/top_level.txt
 autobiopipe/ml/__init__.py
+tests/test_decision.py
 tests/test_detect.py
 tests/test_parser.py
+tests/test_pipeline.py
 tests/test_qc.py

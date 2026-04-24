@@ -1,25 +1,37 @@
-# Python
+# Python bytecode
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
+*.pyo
+
+# Build artifacts
 build/
 dist/
 *.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
 
 # Virtual environments
 .venv/
 venv/
 env/
 
-# IDE
+# Editors
 .idea/
 .vscode/
 
-# Project outputs
+# Outputs and logs
 autobiopipe_output/
+outputs/
+my_results/
 *.log
 
-# Do NOT ignore the autobiopipe/ package folder!
-# The rule "autobiopipe/" should NOT be here
+# Local generated files
+*.pdf
+*.csv
+*.json
+
+# Keep example and tracked fixture outputs
+!examples/*.pdf
+!examples/*.csv
+!examples/*.json

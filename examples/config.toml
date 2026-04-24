@@ -1,14 +1,59 @@
-# AutoBioPipe Configuration
-# Customize QC thresholds and pipeline settings
+# Default AutoBioPipe configuration
+
 [qc]
-min_avg_quality = 25.0      # stricter
-gc_content_min = 40.0       # stricter
-gc_content_max = 60.0       # stricter
-min_read_length = 75        # stricter
-length_cv_threshold = 0.3   # stricter
+# Minimum acceptable average FASTQ quality score.
+min_avg_quality = 20.0
+
+# Expected GC-content bounds for the sample.
+gc_content_min = 35.0
+gc_content_max = 65.0
+
+# Minimum acceptable read or sequence length.
+min_read_length = 50
+
+# Maximum acceptable coefficient of variation for read lengths.
+length_cv_threshold = 0.25
+
+# Ambiguous base thresholds.
+n_fraction_warning_threshold = 0.05
+n_fraction_critical_threshold = 0.20
+
+# Small dataset handling.
+small_dataset_threshold = 100
+enable_small_dataset_warning = true
+
+[biology]
+gene_max_length = 10000
+genome_min_length = 1000000
+coding_score_coding_threshold = 0.65
+coding_score_noncoding_threshold = 0.35
+low_complexity_entropy_threshold = 0.55
+low_complexity_fraction_threshold = 0.30
+homopolymer_run_threshold = 8
+homopolymer_fraction_threshold = 0.15
+duplicate_fraction_warning_threshold = 0.20
+gc_extreme_low = 20.0
+gc_extreme_high = 80.0
+gc_skew_warning_threshold = 0.20
+gc_skew_critical_threshold = 0.35
+abnormal_length_ratio_threshold = 10.0
+length_std_dev_threshold = 100.0
+orf_presence_warning_threshold = 0.30
+coding_potential_warning_threshold = 0.35
+short_sequence_length_threshold = 75
+short_sequence_fraction_threshold = 0.20
+
+[visualization]
+enabled = true
+dpi = 150
+histogram_bins = 20
 
 [pipeline]
-verbose = true
-output_dir = "./strict_results"
-# Output directory for reports
-output_dir = "./autobiopipe_output"
+# Enable more verbose logging when true.
+verbose = false
+
+# Default output directory for generated reports.
+output_dir = "autobiopipe_output"
+
+# Optional maximum record count for test or preview runs.
+max_records = 1000
