@@ -49,9 +49,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/example/autobiopipe"
-Repository = "https://github.com/example/autobiopipe"
-Issues = "https://github.com/example/autobiopipe/issues"
+Homepage = "https://github.com/NischayMehta403/autobiopipe"
+Repository = "https://github.com/NischayMehta403/autobiopipe"
+Issues = "https://github.com/NischayMehta403/autobiopipe/issues"
 
 [project.scripts]
 autobio = "autobiopipe.cli:app"

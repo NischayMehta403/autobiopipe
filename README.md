@@ -16,7 +16,7 @@ AutoBioPipe is a modular Python CLI for automated quality control of biological 
 ## Installation
 
 ```bash
-git clone https://github.com/example/autobiopipe.git
+git clone https://github.com/NischayMehta403/autobiopipe.git
 cd autobiopipe
 pip install -e .
 ```
@@ -68,7 +68,7 @@ The JSON report is the canonical machine-readable output. CSV is useful for spre
 
 ## Configuration
 
-AutoBioPipe reads TOML configuration files. A default example is provided at [examples/config.toml](/home/Fred/autobiopipe/examples/config.toml) and a stricter variant at [examples/config_strict.toml](/home/Fred/autobiopipe/examples/config_strict.toml).
+AutoBioPipe reads TOML configuration files. A default example is provided at [examples/config.toml](examples/config.toml) and a stricter variant at [examples/config_strict.toml](examples/config_strict.toml).
 
 Main config sections:
 
@@ -114,9 +114,9 @@ pytest
 
 Main project docs:
 
-- [docs/CONTRIBUTING.md](/home/Fred/autobiopipe/docs/CONTRIBUTING.md)
-- [docs/ARCHITECTURE.md](/home/Fred/autobiopipe/docs/ARCHITECTURE.md)
-- [CLAUDE.md](/home/Fred/autobiopipe/CLAUDE.md)
+- [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [CLAUDE.md](CLAUDE.md)
 
 ## Notes
 
