@@ -20,6 +20,10 @@ env/
 .idea/
 .vscode/
 
+# Local AI handoff / agent guidance files
+CODEX.md
+CLAUDE.md
+
 # Outputs and logs
 autobiopipe_output/
 outputs/
