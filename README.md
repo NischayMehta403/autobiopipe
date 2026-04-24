@@ -1,4 +1,4 @@
-# AutoBioPipe
+# AutoBioPipe V 0.1.0 
 
 [![Tests](https://github.com/NischayMehta403/autobiopipe/actions/workflows/test.yml/badge.svg)](https://github.com/NischayMehta403/autobiopipe/actions/workflows/test.yml)
 [![Python](https://img.shields.io/badge/python-3.9%2B-1f6feb.svg)](https://www.python.org/)
