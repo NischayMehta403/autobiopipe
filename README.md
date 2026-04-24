@@ -8,6 +8,8 @@ AutoBioPipe is a Python CLI for sequence-file quality control that goes beyond b
 
 It detects file structure, computes core QC metrics, adds lightweight biological interpretation, renders plots, and produces terminal, JSON, CSV, and PDF reports in one run.
 
+AutoBioPipe is aimed at fast first-pass QC for researchers, student projects, prototypes, and command-line workflows where you want something more informative than "file parsed successfully" but lighter than a full downstream pipeline stack.
+
 ## Why AutoBioPipe
 
 Most quick QC scripts stop at counts and averages. AutoBioPipe is designed to give you a fuller first-pass read on a dataset:
@@ -33,6 +35,22 @@ That means a single command can tell you:
 - whether basic QC metrics look suspicious
 - whether the sequences show biologically unusual patterns
 - what concrete findings were triggered
+
+## Supported Inputs
+
+AutoBioPipe currently supports:
+
+- FASTA
+- FASTQ
+- gzipped FASTA and FASTQ
+- single-end files
+- paired-end filename hints inferred from names such as `R1` and `R2`
+
+Important detail:
+
+- paired-end detection is heuristic and filename-based
+- it is helpful metadata, not a guarantee about the experiment design
+- AutoBioPipe currently analyzes one input file at a time rather than jointly processing read pairs
 
 ## Installation
 
@@ -74,6 +92,18 @@ Show the installed version:
 autobio version
 ```
 
+Run a FASTA example:
+
+```bash
+autobio run examples/sample.fasta --output-dir results_fasta
+```
+
+Run with more verbose logging:
+
+```bash
+autobio run examples/sample.fastq --output-dir results --verbose
+```
+
 ## What You Get
 
 A typical run writes:
@@ -86,6 +116,22 @@ A typical run writes:
 - `quality_profile.png`
 
 The JSON report is the canonical structured output. CSV is useful for spreadsheets and downstream tabular review. PDF is intended for quick sharing and archival summaries.
+
+Generated plots include:
+
+- GC distribution
+- sequence or read length distribution
+- per-position quality profile for FASTQ inputs
+
+## Example Workflow
+
+One practical workflow looks like this:
+
+1. Run `autobio detect` to confirm the file type and compression handling look correct.
+2. Run `autobio run` to generate reports and plots.
+3. Inspect the terminal summary for immediate findings.
+4. Use the JSON output for programmatic downstream use.
+5. Share the PDF or CSV output with collaborators if needed.
 
 ## CLI
 
@@ -107,6 +153,31 @@ The JSON report is the canonical structured output. CSV is useful for spreadshee
 `autobio version`
 
 - prints the AutoBioPipe version and Python version
+
+## Decision Rules
+
+The decision engine currently includes rules `QC001` through `QC015`.
+
+Covered finding areas include:
+
+- low average quality
+- GC anomaly or extreme GC content
+- minimum length and abnormal length spread
+- high ambiguous-base fraction
+- suspiciously small datasets
+- low complexity and homopolymer-heavy sequences
+- weak coding potential or ORF absence
+- suspicious duplication
+- GC skew imbalance
+- unusually short sequences
+
+Findings are reported with weighted severities:
+
+- `INFO = 1`
+- `WARNING = 2`
+- `CRITICAL = 3`
+
+This makes the final status more informative than a simple single-threshold pass/fail.
 
 ## Configuration
 
@@ -130,6 +201,89 @@ Run with a custom config:
 autobio run examples/sample.fastq --config examples/config.toml
 ```
 
+Representative configuration knobs include:
+
+- `qc.min_avg_quality`
+- `qc.gc_content_min`
+- `qc.gc_content_max`
+- `qc.min_read_length`
+- `qc.small_dataset_threshold`
+- `biology.low_complexity_fraction_threshold`
+- `biology.homopolymer_fraction_threshold`
+- `biology.duplicate_fraction_warning_threshold`
+- `visualization.dpi`
+- `pipeline.output_dir`
+- `pipeline.max_records`
+
+Minimal example:
+
+```toml
+[qc]
+min_avg_quality = 25.0
+gc_content_min = 30.0
+gc_content_max = 70.0
+
+[pipeline]
+output_dir = "results"
+max_records = 5000
+```
+
+Use the stricter example config if you want a harsher QC posture for demos or experiments:
+
+- [examples/config_strict.toml](examples/config_strict.toml)
+
+## Output Structure
+
+The generated JSON report includes top-level sections for:
+
+- `detection`
+- `qc`
+- `decision`
+- `visualizations`
+
+That makes it suitable for:
+
+- scripting
+- notebook analysis
+- downstream dashboards
+- regression checks in automated workflows
+
+The terminal report is intended for fast review, while JSON is the best format for automation.
+
+## Exit Codes
+
+AutoBioPipe uses exit codes deliberately:
+
+- `0` means the run succeeded and the overall status was `PASS` or `WARNING`
+- `1` means there was an input or runtime error
+- `2` means the pipeline completed, but the rule engine classified the result as `FAIL`
+
+That makes it easy to integrate into shell scripts and CI pipelines.
+
+## Design Notes
+
+Some implementation choices are intentional:
+
+- parsers are generator-based for memory efficiency
+- configuration is TOML-based and human-editable
+- decision rules are registry-driven so new checks can be added cleanly
+- biological interpretation is heuristic and interpretable rather than black-box ML
+- visualization uses a non-interactive matplotlib backend for CLI and CI safety
+
+## Limitations
+
+AutoBioPipe is useful, but it is not trying to replace full production bioinformatics stacks.
+
+Current limitations:
+
+- biological interpretation is heuristic, not organism-aware ground truth
+- paired-end handling is filename-based inference only
+- one file is analyzed per run
+- the bundled example inputs are tiny and mainly intended for testing and demos
+- placeholder modules such as `ai_explain.py` and `autobiopipe.ml` are not active product features yet
+
+Use it as an interpretable QC front end, not as a substitute for domain-specific downstream analysis.
+
 ## Project Structure
 
 - [autobiopipe/](autobiopipe) contains the CLI and pipeline modules
@@ -140,6 +294,27 @@ autobio run examples/sample.fastq --config examples/config.toml
 ## Verification
 
 The test suite is exercised with `pytest`, and the repository includes GitHub Actions CI in [.github/workflows/test.yml](.github/workflows/test.yml).
+
+Recent local verification:
+
+- `112 passed`
+- coverage threshold met at `90.56%`
+
+Run locally:
+
+```bash
+pytest
+```
+
+## Roadmap Ideas
+
+Natural next directions for the project include:
+
+- richer CLI integration tests
+- real multi-file paired-end workflows
+- additional report visualizations
+- stronger config presets for different data types
+- optional AI-assisted explanation layers on top of the structured QC output
 
 ## Notes
 
