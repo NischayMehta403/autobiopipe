@@ -270,20 +270,6 @@ Some implementation choices are intentional:
 - biological interpretation is heuristic and interpretable rather than black-box ML
 - visualization uses a non-interactive matplotlib backend for CLI and CI safety
 
-## Limitations
-
-AutoBioPipe is useful, but it is not trying to replace full production bioinformatics stacks.
-
-Current limitations:
-
-- biological interpretation is heuristic, not organism-aware ground truth
-- paired-end handling is filename-based inference only
-- one file is analyzed per run
-- the bundled example inputs are tiny and mainly intended for testing and demos
-- placeholder modules such as `ai_explain.py` and `autobiopipe.ml` are not active product features yet
-
-Use it as an interpretable QC front end, not as a substitute for domain-specific downstream analysis.
-
 ## Project Structure
 
 - [autobiopipe/](autobiopipe) contains the CLI and pipeline modules
@@ -305,16 +291,6 @@ Run locally:
 ```bash
 pytest
 ```
-
-## Roadmap Ideas
-
-Natural next directions for the project include:
-
-- richer CLI integration tests
-- real multi-file paired-end workflows
-- additional report visualizations
-- stronger config presets for different data types
-- optional AI-assisted explanation layers on top of the structured QC output
 
 ## Author
 
