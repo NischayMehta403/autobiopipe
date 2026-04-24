@@ -57,6 +57,8 @@ Important detail:
 ```bash
 git clone https://github.com/NischayMehta403/autobiopipe.git
 cd autobiopipe
+python -m venv .venv
+source .venv/bin/activate
 pip install -e .
 ```
 
@@ -65,6 +67,8 @@ For development:
 ```bash
 pip install -e .[dev]
 ```
+
+Using a virtual environment is recommended. On many Linux distributions, installing directly into the system Python environment is blocked by default under PEP 668.
 
 ## Quick Start
 
