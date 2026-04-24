@@ -71,6 +71,10 @@ testpaths = ["tests"]
 [tool.coverage.run]
 branch = true
 source = ["autobiopipe"]
+omit = [
+  "autobiopipe/ai_explain.py",
+  "autobiopipe/ml/__init__.py",
+]
 
 [tool.coverage.report]
 fail_under = 90

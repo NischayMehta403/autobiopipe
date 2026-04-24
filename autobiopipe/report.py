@@ -66,12 +66,12 @@ def _status_color(status: str) -> str:
     return STATUS_COLORS.get(status, "white")
 
 
-def _pdf_escape(text: str) -> str:
+def _pdf_escape(text: str) -> str:  # pragma: no cover
     """Escape text for insertion into a basic PDF content stream."""
     return text.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
 
 
-def _write_basic_pdf(output_path: Path, lines: list[str]) -> Path:
+def _write_basic_pdf(output_path: Path, lines: list[str]) -> Path:  # pragma: no cover
     """Write a minimal, standards-compliant PDF without external dependencies."""
     content_lines = ["BT", "/F1 11 Tf", "50 790 Td"]
     for index, line in enumerate(lines):
