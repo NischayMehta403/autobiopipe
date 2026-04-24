@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Callable
+from typing import Callable, Optional
 
 from autobiopipe.config import AutoBioPipeConfig
 from autobiopipe.qc import QCResult
@@ -35,8 +35,8 @@ class Finding:
     metric: str
     message: str
     recommendation: str
-    value: float | None = None
-    threshold: float | None = None
+    value: Optional[float] = None
+    threshold: Optional[float] = None
     possible_cause: str = ""
     next_step: str = ""
     validation_method: str = ""
